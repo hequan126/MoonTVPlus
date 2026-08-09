@@ -1,14 +1,17 @@
 name: Sync Upstream
+
 on:
   schedule:
-    # 每天 UTC 时间 00:00 自动执行一次
     - cron: '0 0 * * *'
-  workflow_dispatch: # 允许手动点击触发
+  workflow_dispatch:
+
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Sync Upstream
-        uses: zhangnew/sync-upstream@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Sync upstream with GitHub CLI
+        run: gh repo sync ${{ github.repository }} -b main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
