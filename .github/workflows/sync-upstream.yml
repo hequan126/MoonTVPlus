@@ -14,4 +14,4 @@ jobs:
       - name: Sync upstream with GitHub CLI
         run: gh repo sync ${{ github.repository }} -b main
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_WITH_WORKFLOW }}
